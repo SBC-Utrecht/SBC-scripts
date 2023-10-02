@@ -42,7 +42,7 @@ touch dynamo_cat.vll
 cd ..
 
 #loop over tilt series
-while read i;
+while read tomo_name;
 	do
 	
 	cd tomograms/${tomo_name}
