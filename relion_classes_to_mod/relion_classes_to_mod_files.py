@@ -71,7 +71,7 @@ def main(starfile, binning=1):
                 for i in output_data])
         conversion_list.append(output_name)
     # Convert text to mdocs
-    used_colors = [MPL_COLORS[i] for i in range(min_class, max_class+1)]
+    used_colors = [MPL_COLORS[i] for i in range(0, max_class-min_class+1)]
     for name in conversion_list:
         outname = name.split('.')[0]+'.mod'
         cmd = ['point2model','-sphere', '5']
