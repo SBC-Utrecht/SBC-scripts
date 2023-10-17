@@ -1,8 +1,10 @@
 #!/usr/bin/env python
-#WARNING: this is all very experimental, assumes:
+# Script to go from an relion classification star file to a set of .mod files for visualisation
+# WARNING: this is all very experimental, assumes:
 # -no more than 10 classes
 # -We can find all required info in the relion star file
 # -imod is installed and point2model is findable
+
 import argparse
 from itertools import chain
 import subprocess
