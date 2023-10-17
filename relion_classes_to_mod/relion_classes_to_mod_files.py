@@ -77,7 +77,8 @@ def main(starfile):
         cmd = ['point2model','-sphere', '5']
         for c in used_colors:
             cmd += ["-color", f"{c[0]},{c[1]},{c[2]}"] 
-        cmd += [f"{name}", "f{outname}"]
+        cmd += [f"{name}", f"{outname}"]
+        print(f"Converting {name} to {outname}")
         subprocess.run(cmd)
 
 if __name__ == "__main__":
