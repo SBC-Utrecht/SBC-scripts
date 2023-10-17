@@ -25,7 +25,7 @@ MPL_COLORS = [(31, 119, 180),
               (188, 189, 34),
               (23, 190, 207)]
 
-def main(starfile):
+def main(starfile, binning=1):
     # output structure: {tomoname: (class, helix_id, x, y, z)}
     outputs = {}
     cols = {i : None for i in RLN_COLS.values()}
@@ -59,7 +59,7 @@ def main(starfile):
             max_class = max(max_class, class_nr)
             particles = outputs.get(tomoname, list())
             # contours start at 0 while classes start a 1, make both start at 1
-            particles.append((class_nr, int(contour)+1, float(x), float(y), float(z)))
+            particles.append((class_nr, int(contour)+1, float(x)/binning, float(y)/binning, float(z)/binning))
             outputs[tomoname] = particles
 
     # Start writing text files
@@ -84,5 +84,6 @@ def main(starfile):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-sf','--starfile', required=True)
+    parser.add_argument('-b', '--binning', default=1, type=int, help='Binning of the tomogram associated with the final .mod')
     args = parser.parse_args()
-    main(starfile=args.starfile)
+    main(starfile=args.starfile, binning=args.binning)
