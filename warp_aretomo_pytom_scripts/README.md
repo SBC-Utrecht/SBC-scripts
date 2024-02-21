@@ -3,6 +3,10 @@
 In here are some scripts to automatically process Warp stacks: tilt-series are aligned with AreTomo and 
 particles are subsequently localized with template matching via pytom.
 
+Scripts depend on:
+* AreTomo (+ IMOD for K3 images)
+* pytom-template-matching-gpu (https://github.com/SBC-Utrecht/pytom-template-matching-gpu)
+
 Some notes:
 * Automated processing is very dependent on the alignment with AreTomo, for this it is essential to remove 
   bad tilts first in Warp so that they do not end up in the stacks. With the `-DarkTol 0.01` option AreTomo is 
