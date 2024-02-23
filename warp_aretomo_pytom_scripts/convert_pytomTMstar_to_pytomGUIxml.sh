@@ -7,12 +7,13 @@
 
 for i in *.mrc;
 do
-	cp "$i/tm_results/${i%.mrc}_particles.star" "$i/tm_results/${i%.mrc}_particles_rln.star"
-	sed -i "s/_ptm/_rln/" "$i/tm_results/${i%.mrc}_particles_rln.star"
-	sed -i "s/_rlnLCCmax/_rlnOriginXAngst/" "$i/tm_results/${i%.mrc}_particles_rln.star"
-	sed -i "s/_rlnCutOff/_rlnOriginYAngst/" "$i/tm_results/${i%.mrc}_particles_rln.star"
-	sed -i "s/_rlnSearchStd/_rlnOriginZAngst/" "$i/tm_results/${i%.mrc}_particles_rln.star"
-	sed -i "s/_rlnDetectorPixelSize/_rlnPixelSize/" "$i/tm_results/${i%.mrc}_particles_rln.star"
-	convert.py -f "$i/tm_results/${i%.mrc}_particles_rln.star" -o "xml"
-	mv "${i%.mrc}_particles_rln.xml" "$i/tm_results/."  
+	cp "$i/tm_results/${i%.mrc}_particles.star" "$i/tm_results/${i%.mrc}_particles_ptm.star"
+	sed -i "s/_ptm/_rln/" "$i/tm_results/${i%.mrc}_particles_ptm.star"
+	sed -i "s/_rlnLCCmax/_rlnOriginXAngst/" "$i/tm_results/${i%.mrc}_particles_ptm.star"
+	sed -i "s/_rlnCutOff/_rlnOriginYAngst/" "$i/tm_results/${i%.mrc}_particles_ptm.star"
+	sed -i "s/_rlnSearchStd/_rlnOriginZAngst/" "$i/tm_results/${i%.mrc}_particles_ptm.star"
+	sed -i "s/_rlnDetectorPixelSize/_rlnPixelSize/" "$i/tm_results/${i%.mrc}_particles_ptm.star"
+	convert.py -f "$i/tm_results/${i%.mrc}_particles_ptm.star" -o "xml"
+	mv "${i%.mrc}_particles_ptm.xml" "$i/tm_results/."  
+
 done
