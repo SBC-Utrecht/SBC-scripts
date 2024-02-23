@@ -8,6 +8,7 @@ Scripts depend on:
 * pytom-template-matching-gpu (https://github.com/SBC-Utrecht/pytom-template-matching-gpu)
 
 Some notes:
+* Each script has in its header which modules need to be loaded on Angstrom. 
 * Automated processing is very dependent on the alignment with AreTomo, for this it is essential to remove 
   bad tilts first in Warp so that they do not end up in the stacks. With the `-DarkTol 0.01` option AreTomo is 
   prevented from automatically attempting to remove dark tilts which makes uploading alignments back to Warp much 
@@ -24,3 +25,5 @@ Some notes:
   some graphs in the output directory that you can inspect to get an idea of how liberal the picking is. If the 
   picking needs to be more liberal increase `--number-of-false-positives` (works for both base and tophat extraction).
   See the pytom docs for specifics.
+* pytom_extract_candidates.py generates star file which cannot be opened in the pytomGUI. In case you want to e.g. do
+  particle deselection a script is available to convert it to a pytomGUI readable .xml file. 
