@@ -78,7 +78,7 @@ def calculate_fit(data_lists, foldername):
     angle_differences = []
 
     # Loop through each doublet of data points
-    for index, data in enumerate(data_lists):
+    for index, data in enumerate(data_lists, start=1):
         # Calculate angles for the current doublet
         angles = calculate_angles(data, num_segments, bend_threshold)
         all_angles.append(angles)
@@ -89,7 +89,7 @@ def calculate_fit(data_lists, foldername):
 
         # Filter all angles greater than the angle_threshold
         if any(angle > angle_threshold for angle in angles):
-            bent_lists.append(index+1)
+            bent_lists.append(index)
 
     # Print results
     if print_results:
