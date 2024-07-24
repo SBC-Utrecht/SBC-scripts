@@ -11,7 +11,7 @@ metadata_file = 'metadata.yaml'
 all_data_straight = pd.DataFrame()
 all_data_bend = pd.DataFrame()
 
-# If grouped is True, the individual histograms will be grouped using 1-4, 5 and 6-9 grouping
+# If grouped is True, the individual histograms will be grouped using 1-4, 5, and 6-9 grouping
 grouped = True # True or False
 grouped_formatted = 'grouped' if grouped else 'single'
 
@@ -137,6 +137,11 @@ def generate_combined_histogram(input_file_path, grouped_combined, type):
 
 # Read the metadata file in memory
 yaml_file = read_metadata()
+
+# If Ready for analysis is false, return error
+if yaml_file is None or not yaml_file['ready4analysis']:
+    print('Please check the metadata file and make sure everything in entered!')
+    exit()
 
 # Main loop
 for foldername in os.listdir(rawdata_folder):

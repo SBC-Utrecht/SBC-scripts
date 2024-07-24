@@ -93,9 +93,9 @@ def calculate_fit(data_lists, foldername):
 
     # Print results
     if print_results:
-        for i, (angles, bending_amount) in enumerate(zip(all_angles, bending_amounts)):
-            print(f"Angles for list {i+1} (in degrees): {angles}")
-            print(f"Bending amount for list {i+1}: {bending_amount}")
+        for i, (angles, bending_amount) in enumerate(zip(all_angles, bending_amounts), start=1):
+            print(f"Angles for list {i} (in degrees): {angles}")
+            print(f"Bending amount for list {i}: {bending_amount}")
 
     # Calculate the aggregate bending scores
     mean_bending = np.mean(bending_amounts)
@@ -123,10 +123,10 @@ def calculate_fit(data_lists, foldername):
     single_result_path = f"{analysis_folder}/{results_folder}/{single_result}"
 
     with open(single_result_path, "w") as file:
-        for i, (angles, bending_amount, angle_difference) in enumerate(zip(all_angles, bending_amounts, angle_differences)):
-            file.write(f"Angles for doublet {i+1} (in degrees): {angles}\n")
+        for i, (angles, bending_amount, angle_difference) in enumerate(zip(all_angles, bending_amounts, angle_differences), start=1):            
+            file.write(f"Angles for doublet {i} (in degrees): {angles}\n")
             file.write(f"Max angle difference: {angle_difference}\n")
-            file.write(f"Bending amount for doublet {i+1}: {bending_amount}\n\n")
+            file.write(f"Bending amount for doublet {i}: {bending_amount}\n\n")
     
         file.write(f"\nAggregate Scores:\n")
         file.write(f"Mean Bending Amount: {mean_bending}\n")

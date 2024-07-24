@@ -5,6 +5,9 @@ There are a few scripts and files in this folder which are quite important. You 
 python3 <script.py>
 ```
 
+## Requirements
+The python package Numpy, Pandas, Scipy, matplotlib,PyYAML and Seaborn are required. Furthermore the command model2point from the iMOD package should be available in the commandline as well.
+
 ## format_inital.py
 This is the main script that kickstarts everything. It makes all the nessecary folder and checks whether all the nessecary files are present. It starts by getting a points file from the .mod file using the model2point command from PEET. After which a new csv file is made with the XYZ coordinates and the contour of each point. After which the corrected doublet is calculated based on the metadata file. Lastly the corrected doublet and the class is added to each point in the csv. 
 
@@ -63,7 +66,7 @@ bendDirection:
   poly12Tomo59: straight
 ```
 
-### Folder structure
+## Folder structure
 This should be the rough folder structure. You can of course add more tomograms in the /Data folder
 
 geneate_dynein_conformation_graphs/

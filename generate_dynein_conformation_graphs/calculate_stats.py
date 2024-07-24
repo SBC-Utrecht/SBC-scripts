@@ -3,6 +3,7 @@ import pandas as pd
 import os 
 from scipy.stats import chi2_contingency
 
+# TODO: this should be converted to argparse
 rawdata_folder = 'Data'
 analysis_folder = 'Results'
 results_folder = "Stats"
@@ -14,9 +15,11 @@ if not os.path.exists(f"{analysis_folder}/{results_folder}"):
     os.makedirs(f"{analysis_folder}/{results_folder}")
 
 for foldername in os.listdir(rawdata_folder):
+    # Skip poly01Tomo01 because it only has 1 class so there are no other classes to compare it with
     if foldername == 'poly01Tomo01':
         continue
 
+    # Set formatted file names and associated paths
     input_file = f'{foldername}_bin4_points.csv'
     input_file_count = f'{foldername}_count.csv'
     input_file_path = f"{analysis_folder}/{foldername}/{input_file}"
@@ -32,7 +35,7 @@ for foldername in os.listdir(rawdata_folder):
 
     for dynein_class in [[1],[2,4],[3]]:
         # Ensure input file exists
-        if not os.path.exists(input_file_path) and os.path.exists(input_file_count_path):
+        if not (os.path.exists(input_file_path) and os.path.exists(input_file_count_path)):
             print(f"Couldn't find {foldername}, moving on..")
             continue
         
