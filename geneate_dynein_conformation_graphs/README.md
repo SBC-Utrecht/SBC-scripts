@@ -82,4 +82,3 @@ geneate_dynein_conformation_graphs/
     └── poly02Tomo07/
         ├── 04_bin4_classification_MOTL_poly02Tomo07_Iter2.csv
         └── poly02Tomo07_bin4_doublets_PtsAdded.mod
-  
