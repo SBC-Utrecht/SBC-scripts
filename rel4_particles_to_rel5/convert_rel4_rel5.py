@@ -38,11 +38,11 @@ def scale_coordinates(star_filename, pixel_sizes):
     print(f"RELION5 coordinates written to: {output_filename}")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Scale coordinates in a STAR file by pixel sizes and detector pixel size.")
+    parser = argparse.ArgumentParser(description="Convert a RELION4 particle .star file to a RELION5 star file.")
     parser.add_argument("starfile", type=str, help="Path to the input STAR file")
-    parser.add_argument("pixel_x", type=float, help="Pixel size in X dimension")
-    parser.add_argument("pixel_y", type=float, help="Pixel size in Y dimension")
-    parser.add_argument("pixel_z", type=float, help="Pixel size in Z dimension")
+    parser.add_argument("pixel_x", type=float, help="Number of pixels in X dimension")
+    parser.add_argument("pixel_y", type=float, help="Number of pixels in Y dimension")
+    parser.add_argument("pixel_z", type=float, help="Number of pixels in Z dimension")
 
     args = parser.parse_args()
     pixel_sizes = (args.pixel_x, args.pixel_y, args.pixel_z)
