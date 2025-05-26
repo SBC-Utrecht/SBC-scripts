@@ -38,7 +38,9 @@ def scale_coordinates(star_filename, pixel_sizes):
     print(f"RELION5 coordinates written to: {output_filename}")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Convert a RELION4 particle .star file to a RELION5 star file.")
+    parser = argparse.ArgumentParser(
+        description="Convert a RELION4 particle .star file to a RELION5 star file. This requires input on the dimensions of the tomogram used for picking."
+    )
     parser.add_argument("starfile", type=str, help="Path to the input STAR file")
     parser.add_argument("pixel_x", type=float, help="Number of pixels in X dimension")
     parser.add_argument("pixel_y", type=float, help="Number of pixels in Y dimension")
