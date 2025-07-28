@@ -1,7 +1,7 @@
 ## Correct pre-exposure dose of star files created by aretomo3torelion5.py
 
 This script corrects the star files that are written out by aretomo3torelion5.py script from the TomoGuide.
-Run `python correct_pre_exposure_dose.py` to see the (required) input flags.
+Run `python correct_pre_exposure_dose.py --help` to see the (required) input flags.
 
 
 Scripts depend on:
