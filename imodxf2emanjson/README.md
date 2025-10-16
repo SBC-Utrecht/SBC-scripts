@@ -9,4 +9,4 @@
     4) Need to have eman2 loaded, we have an eman2 conda environment so eman2 is in python path and libraries are importable
     5) run the script with: python imodxf2emanjson.py
     6) Generate tomogram with: e2tomogram.py tiltseries/tomo01.hdf --tltstep=3.0 --clipz 500 --niter=0 --patchtrack=0 --load
-      * where tltstep is your tilt step & clipz is your bin4 z size in pixels
+       1) where tltstep is your tilt step & clipz is your bin4 z size in pixels
