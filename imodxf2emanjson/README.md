@@ -1,4 +1,4 @@
-##Make eman2 tomograms from imod tilt series alignment
+## Make eman2 tomograms from imod tilt series alignment
 * Generates hdf from mrc and puts in to tiltseries directory
 * Generates eman2 json file from imod style xf and tlt file produced with aretomo3 -OutImod 1 flag and puts into info directory
 * Can optionally add defocus values from aretomo3 CTF.txt file
