@@ -6,20 +6,18 @@ Created on Fri Oct  3 13:06:55 2025
 @author: M. S. C. Gravett
 """
 
-#from EMAN2 import *
-import glob
-import subprocess
-import argparse
+from EMAN2 import *
 import pathlib
 import numpy as np
 
-def convert_to_hdf(tomo_name):
+def convert_to_hdf(tilt_name): #write out mrc in hdf format for eman2
     Path('tiltseries').mkdir(parents=True, exist_ok=True) #make directory in eman style structure
-    tomo = EMData(tomo_name) #open mrc
-    name_core = tomo_name.split('/')[-1][:-4] #get name
+    tiltseries = EMData(tilt_name) #open mrc
+    name_core = tilt_name.split('/')[-1][:-4] #get name
     new_name = f"{name_core}.hdf" #hdf name
-    path = tomo_name.replace(f'{name_core}.mrc','') #path to file
-    tomo.write_image(f'tiltseries/{path}{new_name}') #write image, need to edit this so puts in tiltseries folder
+    #path = tilt_name.replace(f'{name_core}.mrc','') #path to file
+    tiltseries.write_image(f'tiltseries/{new_name}') #write image
+
 
 def readxf(xf_file, tlt_file):
     # EMAN translates then rotates, IMOD rotates then translates
@@ -50,31 +48,32 @@ def readxf(xf_file, tlt_file):
     x_tilt = [0.0]*len(A11) #xtilt is 0 for aretomo3 imod output
     return dx_eman, dy_eman, z_rot, y_tilt, x_tilt
 
-def get_defocus(defocus_file):
+def get_defocus(defocus_file): #get defocus values from aretomo3 ctf.txt file
     df_array = np.loadtxt(defocus_file)
     df1 = df_array[:,1]
     df2 = df_array[:,2]
     av_df = (df1+df2)/2
     return av_df*10**-4
 
-def imodxf2emanjson(xf_file, tlt_file, defocus_file=''): 
+def imodxf2emanjson(xf_file, tlt_file, unbinned_pix,tilt_name,defocus_file=''): #Takes imod xf and tilt file to make eman2 json
     Path('info').mkdir(parents=True, exist_ok=True) #make directory in eman style structure
-    json_name = f'info/{tomo_name}_info.json' #name of json
+    tilt_name = tilt_name.split('/')[-1][:-4]
+    json_name = f'info/{tilt_name}_info.json' #name of json
     tomo_json = js_open_dict(json_name) #open empty json
     dx, dy, z_rot, y_tilt, x_tilt = readxf(xf_file, tlt_file) #get data from xf file
     json = np.stack((dx, dy, z_rot, y_tilt, x_tilt), axis=-1) #xf data in corect format
-    tomo_json['apix_unbin'] = '2.21' #pixel size angstroms
-    tomo_json['tlt_file']="tiltseries/disco_tomo01.mrc.hdf" #tilt series path
+    tomo_json['apix_unbin'] = unbinned_pix #pixel size angstroms
+    tomo_json['tlt_file']=f"tiltseries/{tilt_name}.hdf" #tilt series path
     tomo_json['tlt_params'] = json #write xf data to json tlt_params
     tomo_json['ali_loss'] = [1]*len(dx) #just set to arbitrary value
     tomo_json['phase'] = [10.0]*len(dx) #not sure if this is correct just copied values in tutorials
     if len(defocus_file)>0: 
         defocus = get_defocus(defocus_file) #gets defocus from
-    tomo_json['defocus'] = defocus
+        tomo_json['defocus'] = defocus
 
-
-tomo_name = '../tiltseries_mrc/disco_tomo01.mrc.mrc'
-convert_to_hdf(tomo_name) #convert tilt teries from mrc to hdf
-imodxf2emanjson('test.xf', 'test.tlt', 'test_CTF.txt') #xf file and tilt file from imod, ctf file from aretomo not required
+unbinned_pix = 2.21 #unbinned pixel size in angstrom
+tilt_name ='path/to/tilt/series/tomo1.mrc' #tilseries
+convert_to_hdf(tilt_name) #convert tilt teries from mrc to hdf
+imodxf2emanjson('tomo1.xf', 'tomo1.tlt', unbinned_pix,tilt_name,'tomo1_CTF.txt') #xf file and tilt file from imod, ctf file from aretomo not required
 
 
