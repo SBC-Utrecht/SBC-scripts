@@ -1,2 +1,3 @@
 # skip vim swap files
 *.swp
+.DS_Store
