@@ -13,8 +13,7 @@ import numpy as np
 def convert_to_hdf(tilt_name): #write out mrc in hdf format for eman2
     Path('tiltseries').mkdir(parents=True, exist_ok=True) #make directory in eman style structure
     tiltseries = EMData(tilt_name) #open mrc
-    name_core = tilt_name.split('/')[-1][:-4] #get name
-    new_name = f"{name_core}.hdf" #hdf name
+    new_name = tilt_name.split('/')[-1].replace("mrc","hdf") #get name
     #path = tilt_name.replace(f'{name_core}.mrc','') #path to file
     tiltseries.write_image(f'tiltseries/{new_name}') #write image
 
@@ -57,7 +56,7 @@ def get_defocus(defocus_file): #get defocus values from aretomo3 ctf.txt file
 
 def imodxf2emanjson(xf_file, tlt_file, unbinned_pix,tilt_name,defocus_file=''): #Takes imod xf and tilt file to make eman2 json
     Path('info').mkdir(parents=True, exist_ok=True) #make directory in eman style structure
-    tilt_name = tilt_name.split('/')[-1][:-4]
+    tilt_name = tilt_name.split('/')[-1].replace(".mrc","")
     json_name = f'info/{tilt_name}_info.json' #name of json
     tomo_json = js_open_dict(json_name) #open empty json
     dx, dy, z_rot, y_tilt, x_tilt = readxf(xf_file, tlt_file) #get data from xf file
