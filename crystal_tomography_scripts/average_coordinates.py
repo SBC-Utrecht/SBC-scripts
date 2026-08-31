@@ -53,7 +53,7 @@ def process_mrc(input_mrc, output_mrc, coord_file, box_size):
     coordinates = read_coordinates(coord_file)
 
     # Create an empty volume to accumulate the data
-    start_box = extract_box(volume, [np.size(volume[0,0,:])/2,np.size(volume[0,:,0])/2,np.size(volume[:,0,0])/2],box_size)
+    start_box = extract_box(volume, [s/2 for s in volume.shape[::-1]], box_size)
     result_box = start_box
     result_box.flags.writeable = True
     result_box[:,:,:] = 0 
