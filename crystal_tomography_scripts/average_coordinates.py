@@ -38,7 +38,7 @@ def read_coordinates(file_path):
                 continue
             try:
                 x, y, z = map(float, values[:3])  # Convert to float first
-                coordinates.append((int(round(x)), int(round(y)), int(round(z))))
+                coordinates.append((int(x), int(y), int(z)))
             except ValueError:
                 print(f"Skipping malformed line: {repr(line)}")  # Debugging info
     return coordinates
